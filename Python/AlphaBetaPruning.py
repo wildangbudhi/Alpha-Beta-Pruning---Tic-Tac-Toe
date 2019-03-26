@@ -21,12 +21,15 @@ class AlphaBetaPruning:
     
     def isFull(self, state, size):
         checker = 3
-
         for _ in range (0, size * size):
             if((state & checker) == 0): return False
             checker = checker << 2
         
         return True
+
+    def isThereWinner(self, state, size):
+        
+        return False
 
     def solve(self):
         stack, isVisited = list(), dict()
@@ -34,14 +37,13 @@ class AlphaBetaPruning:
         stack.append(State(self.InitialState, 0))
         
         while stack:
-
             node = stack.pop()
             isVisited[node.state] = True
 
-            #expand kurang cek menang
-            if(not self.isFull(node.state, node.size)):
+            #expand
+            if(not self.isFull(node.state, node.size) and not self.isThereWinner(node.state, node.size)):
                 neighbors = self.expand(node.state, node.size, node.depth % 2)
                 for neighbor in neighbors:
-                    stack.append(State(neighbor, node.depth + 1))
+                    if(neighbor not in isVisited): stack.append(State(neighbor, node.depth + 1))
 
 
