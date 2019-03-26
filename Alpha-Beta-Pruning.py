@@ -1,14 +1,14 @@
 from State import State
-from BitMask import BitMask
  
 def main():
-    a = [   ['x', ' ', ' '],
-            [' ', ' ', ' '],
-            [' ', ' ', ' '], ]
+    InitState = [   ['x', 'o', ' '],
+                    ['x', 'o', ' '],
+                    ['x', 'o', ' ']     ]
 
-    bm = BitMask()
-    state = bm.Hash(a)
-    print(state)
+    InitState = State(InitState)
+
+    print(InitState.state)
+    print(InitState.getTable())
 
 if __name__ == "__main__":
     main()

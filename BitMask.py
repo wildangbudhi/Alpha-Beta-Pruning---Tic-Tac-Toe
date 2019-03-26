@@ -12,11 +12,17 @@ class BitMask:
 
         return res
     
-    def UnHash(self, state, size):
-        count = 0
-        res = [[None] * size] * size
+    def UnHash(self, num, size):
+        res = []
 
         for i in range(0, size):
+            res.append([])
             for j in range(0, size):
                 temp = 3
-                count = count + 2
+                cal = num & temp
+                if(cal == 1): res[i].append('x')
+                elif(cal == 2): res[i].append('o')
+                else: res[i].append(' ')
+                num = num >> 2
+        
+        return res
