@@ -1,16 +1,14 @@
-from BitMask import BitMask
+from BitMask import Hash, UnHash
 
-class State():
-
-    bitmask = BitMask()
-
-    def __init__(self, state, depth, alpha=0, beta=None, isPruning=False):
-        self.state = self.bitmask.Hash(state)
+class State:
+    def __init__(self, state, id, depth, alpha=0, beta=None, isPruning=False):
+        self.state = Hash(state)
         self.size = len(state)
+        self.id = id
         self.depth = depth
         self.alpha = alpha
         self.beta = beta
         self.isPruning = False
     
     def getTable(self):
-        return self.bitmask.UnHash(self.state, self.size)
+        return UnHash(self.state, self.size)
