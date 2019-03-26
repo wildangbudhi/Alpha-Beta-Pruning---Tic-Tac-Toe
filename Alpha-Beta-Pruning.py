@@ -1,21 +1,14 @@
-import json
+from State import State
+from BitMask import BitMask
+ 
+def main():
+    a = [   ['x', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' '], ]
 
-out = [ 
-        [1,2,3, 10, 11], 
-        [4,5,6], 
-        [7,8,0]
-                        ]
-data = [    
-            [   [1,2,3], 
-                [4,5,6], 
-                [7,8,0] ], 
+    bm = BitMask()
+    state = bm.Hash(a)
+    print(state)
 
-            [   [1,2,3], 
-                [4,5,6], 
-                [7,8,0] ], 
-
-            [   [1,2,3], 
-                [4,5,6], 
-                [7,8,0] ]
-                            ]
-print(json.dumps({'tree': out, 'data': data}))
+if __name__ == "__main__":
+    main()
