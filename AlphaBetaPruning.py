@@ -5,30 +5,43 @@ class AlphaBetaPruning:
         self.InitialState = InitialState
 
     def expand(self, state, size, player):
-
         res = []
-        temp = state
         checker = 3
 
-        for i in range(0, size*size):
-
-            if((temp & checker) == 0):
-                if(player == 1):
-                    res.append(temp | (1 << (i * 2)))
-                elif(player == 2):
-                    res.append(temp | (2 << (i * 2)))
+        for i in range(0, size * size):
+            if((state & checker) == 0):
+                if(player == 0): # player x
+                    res.append(state | (1 << (i * 2)))
+                elif(player == 1): # player y
+                    res.append(state | (2 << (i * 2)))
             
             checker = checker << 2
 
         return res
+    
+    def isFull(self, state, size):
+        checker = 3
+
+        for _ in range (0, size * size):
+            if((state & checker) == 0): return False
+            checker = checker << 2
+        
+        return True
 
     def solve(self):
         stack, isVisited = list(), dict()
 
-        stack.append(State(self.InitialState, 0, 0))
+        stack.append(State(self.InitialState, 0))
         
         while stack:
 
             node = stack.pop()
             isVisited[node.state] = True
+
+            #expand kurang cek menang
+            if(not self.isFull(node.state, node.size)):
+                neighbors = self.expand(node.state, node.size, node.depth % 2)
+                for neighbor in neighbors:
+                    stack.append(State(neighbor, node.depth + 1))
+
 
