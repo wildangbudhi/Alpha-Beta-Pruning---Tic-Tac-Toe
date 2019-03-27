@@ -55,7 +55,7 @@ class AlphaBetaPruning:
     def isThereWinner(self, state):
         
         for data in self.checkerList:
-            if((data[1] & state) == state):
+            if((data[1] & state) == data[1]):
                 return data[0]
 
         return 0
