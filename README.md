@@ -1,4 +1,4 @@
 # Alpha-Beta-Pruning---Tic-Tac-Toe
 
-- [x] Algoritma  
+- [ ] Algoritma  
 - [ ] Representasi Game  
