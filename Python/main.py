@@ -2,19 +2,22 @@ from State import State
 from AlphaBetaPruning import AlphaBetaPruning, UnHash
 
 def main():
-    InitStateA = [   ['x', 'o', ' '],
-                    [' ', ' ', ' '],
-                    [' ', 'o', 'x']     ]
+    InitStateA = [  ['x', 'o', ' ', ' '],
+                    [' ', ' ', ' ', ' '],
+                    [' ', 'o', 'x', ' '],
+                    [' ', 'o', 'x', ' ']   ]
 
-    InitStateB = State(InitStateA, 0, 0)
-
-    print(InitStateB.state)
+    # InitStateA = [  ['x', 'o', ' '],
+    #                 [' ', ' ', ' '],
+    #                 [' ', 'o', 'x']   ]
 
     ABP = AlphaBetaPruning(InitStateA)
-    a = ABP.expand(InitStateB.state, 3, 2)
-
+    
+    a = ABP.checkerList
     for i in a:
-        print(UnHash(i, 3))
+       print(i[0], UnHash(i[1], ABP.size))
+
+   
 
 if __name__ == "__main__":
     main()
