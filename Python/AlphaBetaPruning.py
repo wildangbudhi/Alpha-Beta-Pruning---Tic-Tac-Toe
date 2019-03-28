@@ -5,6 +5,7 @@ class AlphaBetaPruning:
         self.InitialState = Hash(InitialState)
         self.size = len(InitialState)
         self.checkerList = []
+        self.AdjList = dict()
         self.__setCheckerList()
 
     def __setCheckerList(self):
@@ -67,10 +68,13 @@ class AlphaBetaPruning:
             node = stack.pop()
             isVisited[node.state] = True
 
-            #expand
+            # expand
+            neighbors = []
             if(not self.isThereWinner(node.state)):
                 neighbors = self.expand(node.state, node.depth % 2)
                 for neighbor in neighbors:
                     if(neighbor not in isVisited): stack.append(State(neighbor, node.depth + 1))
 
+            # Adj. List set
+            self.AdjList[node.state] = neighbors
 
