@@ -1,4 +1,5 @@
 from State import State, Hash, UnHash
+from sys import maxsize
 
 class AlphaBetaPruning:
     def __init__(self, InitialState):
@@ -61,20 +62,64 @@ class AlphaBetaPruning:
 
         return 0
 
-    def solve(self):
-        stack, isVisited = list(State(self.InitialState, 0)), dict()
+    def isFull(self, state):
+        checker = 3
+        for i in range(0, self.size * self.size):
+            if((state & checker) == 0): return False
+            checker = checker << 2
+        return True
 
-        while stack:
-            node = stack.pop()
-            isVisited[node.state] = True
+    def solve(self, state, depth, alpha, beta, maximum):
+        self.AdjList[state] = []
 
-            # expand
-            neighbors = []
-            if(not self.isThereWinner(node.state)):
-                neighbors = self.expand(node.state, node.depth % 2)
-                for neighbor in neighbors:
-                    if(neighbor not in isVisited): stack.append(State(neighbor, node.depth + 1))
+        # print(UnHash(state, self.size))
 
-            # Adj. List set
-            self.AdjList[node.state] = neighbors
+        value = alpha if (depth % 2) == 0 else beta
+        utility = self.isThereWinner(state)
+        isFull = self.isFull(state)
+
+        if(utility): return 100 if utility == 1 else -100
+        if(isFull): return 0
+
+        childs = self.expand(state,(depth) % 2)
+
+        if((depth % 2) == 0) : # max
+            
+            best = -maxsize
+
+            for child in childs:
+                self.AdjList[state].append(child)
+
+                value = self.solve(child, depth + 1, alpha, beta, maximum)
+
+                best = max(best, value)
+                alpha = max(alpha, best)
+
+                # Pruning
+                if(beta <= alpha):
+                    # print('Pruning')
+                    break
+
+            return best
+        
+        else: # min
+            best = maxsize
+
+            for child in childs:
+                self.AdjList[state].append(child)
+
+                value = self.solve(child, depth + 1, alpha, beta, maximum)
+
+                best = min(best, value)
+                beta = min(beta, best)
+
+                # Pruning
+                if(beta <= alpha):
+                    # print('Pruning')
+                    break
+
+            return best
+
+            
+            
 

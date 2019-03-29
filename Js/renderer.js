@@ -2,7 +2,10 @@ const {PythonShell} = require('python-shell')
 
 function python() {
     // contoh data
-    var data = [[1, 2, 3], [4, 6, 6], [7, 8, 9]];
+    var data = [[1, 2, 3], 
+                [4, 6, 6], 
+                [7, 8, 9]];
+                
     data = JSON.stringify(data);
     
     let options = {

@@ -1,20 +1,22 @@
-from AlphaBetaPruning import AlphaBetaPruning, State , UnHash
+from AlphaBetaPruning import AlphaBetaPruning, State , UnHash, maxsize
 
 def main():
-    InitStateA = [  ['x', 'o', ' ', ' '],
-                    [' ', ' ', ' ', ' '],
-                    [' ', 'o', 'x', ' '],
-                    [' ', 'o', 'x', ' ']   ]
+    # InitStateA = [  ['x', 'o', ' ', ' '],
+    #                 [' ', ' ', ' ', ' '],
+    #                 [' ', 'o', 'x', ' '],
+    #                 [' ', 'o', 'x', ' ']   ]
 
-    # InitStateA = [  ['x', 'o', ' '],
-    #                 [' ', ' ', ' '],
-    #                 [' ', 'o', 'x']   ]
+    InitStateA = [  ['o', 'o', 'x'],
+                    [' ', 'x', ' '],
+                    ['o', 'x', ' ']   ]
 
     ABP = AlphaBetaPruning(InitStateA)
-    
-    a = ABP.checkerList
-    for i in a:
-       print(i[0], UnHash(i[1], ABP.size))
+    ABP.solve(ABP.InitialState, 0, -maxsize, maxsize, 'x')
+
+    for i, j in ABP.AdjList.items():
+        print(UnHash(i, ABP.size))
+        for child in j:
+            print('-->', UnHash(child, ABP.size))
 
 if __name__ == "__main__":
     main()
