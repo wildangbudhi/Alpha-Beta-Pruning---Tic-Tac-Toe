@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello World!</title>
+    <!-- front end framework includes -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/pruningWindow.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+     <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"> 
+    <!---- Must Add above thing or you can use alternative icons or CSS Entities---->
+  </head>
+  <body>
+    <h1 class="Hell">Hello World!</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <p id="answer"></p>
+    <input type="button" value="" onclick="python()">
+    
+    <!-- tree -->
+
+    <div class="tree ">
+      <ul>
+      
+      <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#Web" aria-expanded="true" aria-controls="Web"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Web</a></span>
+      <div id="Web" class="collapse show">
+      <ul>
+       <li><span><i class="far fa-file"></i><a href="#!"> Link 1</a></span></li>
+       <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#page1" aria-expanded="false" aria-controls="page1"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Page 1</a></span>
+         <ul><div id="page1" class="collapse">
+           <li><span><i class="far fa-file"></i><a href="#!"> Link 1</a></span></li>
+           <li><span><i class="far fa-file"></i><a href="#!"> Link 2</a></span></li>
+           <li><span><i class="far fa-file"></i><a href="#!"> Link 3</a></span></li>
+           <li><span><i class="far fa-file"></i><a href="#!"> Link 4</a></span></li></div>
+         </ul>
+       </li>
+      
+      
+      <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#Page2" aria-expanded="false" aria-controls="Page2"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Page 2</a></span>
+        <ul><div id="Page2" class="collapse">
+          <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#folder1" aria-expanded="false" aria-controls="folder1"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Folder 1</a></span>
+             <ul><div id="folder1" class="collapse">
+               <li><span><i class="far fa-file"></i><a href="#!"> Link 1</a></span></li>
+               <li><span><i class="far fa-file"></i><a href="#!"> Link 2</a></span></li>
+               <li><span><i class="far fa-file"></i><a href="#!"> Link 3</a></span> <a href="#!">& More Link</a></li></div>
+             </ul>
+            </li>
+      
+            <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#folder2" aria-expanded="false" aria-controls="folder2"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Folder 2</a></span>
+             <ul><div id="folder2" class="collapse">
+              <li><span><i class="far fa-file"></i><a href="#!"> Link 1</a></span></li>
+              <li><span><i class="far fa-file"></i><a href="#!"> Link 2</a></span></li>
+              <li><span><i class="far fa-file"></i><a href="#!"> Link 3</a></span> <a href="#!">& More Link</a></li></div>
+             </ul>
+            </li>
+                              
+           <li><span><a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#folder3" aria-expanded="false" aria-controls="folder3"><i class="collapsed"><i class="fas fa-folder"></i></i>
+      <i class="expanded"><i class="far fa-folder-open"></i></i> Folder 3</a></span>
+             <ul><div id="folder3" class="collapse">
+              <li><span><i class="far fa-file"></i><a href="#!"> Link</a></span> <a href="#!">& More Link</a></li></div>
+             </ul>
+           </li>
+           
+          <li><span><i class="far fa-file"></i><a href="#!"> Link</a></span></li>    
+           
+           </div>
+        </ul>
+      </li>
+      
+      
+       <li><span><i class="far fa-file"></i><a href="#!"> Link 2</a></span></li>
+      
+      
+      
+      </ul>
+      </div>
+      </li>
+      </ul>
+      
+      </div>      
+
+      <!-- end tree -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="Js/renderer.js"></script>
+  </body>
+</html>
