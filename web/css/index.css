@@ -1,0 +1,21 @@
+body{
+    margin:0px;
+    padding:0px;
+    font-family: verdana;
+    text-align: center;
+    background: rgba(250, 235, 215, 0.5);
+}
+
+h1, h3{
+    text-align: center;
+}
+
+p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: justify;
+}
+
+a{
+    color: blue;
+    text-align: center;
+}
