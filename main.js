@@ -3,16 +3,21 @@ const ipc = require('electron').ipcMain
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win
+let win;
+let winHasil;
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 900 })
-  winIntro = new BrowserWindow({ frame:false, width:400, height:320 });
+  win = new BrowserWindow({ width: 1400, height: 700, resizable: false })
+  //winIntro = new BrowserWindow({ frame:false, width:400, height:320 });
+  
+  winHasil = new BrowserWindow()
+  winHasil.loadFile('web/hasil.html');
+  winHasil.hide();
 
   // and load the index.html of the app.
   win.loadFile('web/run.html')
-  winIntro.loadFile('web/index.html')
+  //winIntro.loadFile('web/index.html')
 
   // Open the DevTools.
   //win.webContents.openDevTools()
@@ -22,6 +27,7 @@ function createWindow () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
+    app.quit();
     win = null
   })
 }
@@ -58,3 +64,9 @@ ipcMain.on('board-size', (event, arg) => {
   win.webContents.send('action-update-label', arg);
 });
 */
+
+//Menangkap ukuran board
+ipc.on('ukuran', function(e, item){
+  winHasil.webContents.send('ukuran', item);
+  console.log(item);
+});

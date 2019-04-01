@@ -8,9 +8,14 @@ body{
     background: rgb(68, 69, 99);
 }
 
-button{
-    width: 40%;
-    height: 30px;
+p{
+    margin-top: 20px;
+}
+
+.container{
+    float: left;
+    width: 32vw;
+
 }
 
 select{
@@ -20,11 +25,10 @@ select{
 
 table
 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    height: 70vh;
-    font-size: 5.9vh;
+    margin-left: 5px;
+    width: 31vw;
+    height: 400px;
+    font-size:5.5vh;
     background: #f8f8f8;
     
 }
@@ -36,7 +40,7 @@ table, td, tr{
 
 td
 {
-    width: 55px;
+    width: 40px;
     border: solid 4px black;
     text-align:center;
     box-sizing:border-box;
@@ -48,14 +52,50 @@ td:hover
     cursor:pointer;
 }
 
-.game
-{
-    background:#efefef;
-    border:solid 10px #333;
+.tabel{
+    margin-top: 100px;
 }
 
-.clear
-{
-    clear:both;
+button{
+    width: 100px;
 }
-    
+
+.tree{
+    text-align: left;
+}
+
+ul.tree li {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+
+ul.tree li a {
+    color: orange;
+    text-decoration: none;
+}
+
+ul.tree li a:before {
+    height: 1em;
+    padding:0 .1em;
+    font-size: .8em;
+    display: block;
+    position: absolute;
+    left: -1.3em;
+    top: .2em;
+}
+
+ul.tree li > a:not(:last-child):before {
+    content: '+';
+}
+
+ul.tree li.open > a:not(:last-child):before {
+    content: '-';
+}
