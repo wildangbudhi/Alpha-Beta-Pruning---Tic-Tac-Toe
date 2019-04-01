@@ -6,32 +6,164 @@
     <link rel= "stylesheet" href="../web/css/run.css">
   </head>
   <body>
-    <div>
-        <div class="container">
-            <p>
-              Pilih ukuran board 
-              <select onclick="submit()" id="board" name="board">
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-                <br>
-                <br>
-                <button type="button" onclick="restart()" id="restart"> RESTART </button>
-                <!----button type="button" onclick="reset()" id="resetBtn">RESET</button>-->
-            </p>           
-        </div>
-        <div class="tabel" style="overflow-x:auto;">
-            <table id="game" class="tictactoe" contenteditable="true"></table>
-        </div>
+    <div class="container">
+      <h4>Initial State</h4>
         <p>
-          Ukuran Tabel yang dipilih adalah : <span id="demo1"></span> x <span id="demo2"></span>
-        </p>
+          Pilih ukuran board 
+          <select onclick="submit()" id="board" name="board">
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <br>
+            <br>
+            <button type="button" onclick="restart()" id="restart"> RESTART </button>
+            <button type="button" onclick="hasil()" id="hasil"> PLAY </button>
+            <!----button type="button" onclick="reset()" id="resetBtn">RESET</button>-->
+        </p>           
+        <div style="overflow-x:auto;">
+          <table id="game" class="tictactoe" contenteditable="true"></table>
+        </div>
+    </div>
+
+    <div class="container">   
+      <h4>Menampilkan Tree:</h4>
+      <p>
+        Ukuran Tabel yang dipilih adalah : <span id="demo1">3</span> x <span id="demo2">3</span>
+      </p>  
+      <ul class="tree">
+        <li><a href="#">Part 1</a>
+          <ul>
+            <li><a href="#">Item A</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item B</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item C</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item D</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item E</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+        <li><a href="#">Part 2</a>
+          <ul>
+            <li><a href="#">Item A</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item B</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item C</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item D</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item E</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+        <li><a href="#">Part 3</a>
+          <ul>
+            <li><a href="#">Item A</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item B</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item C</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item D</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Item E</a>
+              <ul>
+                <li><a href="#">Sub-item 1</a></li>
+                <li><a href="#">Sub-item 2</a></li>
+                <li><a href="#">Sub-item 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">   
+        <h4>Menampilkan State:</h4>  
+        <div class="tabel" style="overflow-x:auto;">
+          <table id="game2" class="tictactoe" contenteditable="true"></table>
+        </div>
       </div>
     
     <script src="run.js"></script>

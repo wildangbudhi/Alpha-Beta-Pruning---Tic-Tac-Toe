@@ -1,30 +1,56 @@
-const electron = require('electron')
-const path = require('path')
-const BrowserWindow = electron.remote.BrowserWindow
+const electron = require('electron');
+const path = require('path');
+const BrowserWindow = electron.remote.BrowserWindow;
+const {ipcRenderer} = electron;
 
 const resetBtn = document.getElementById('resetBtn')
+const hasilBtn = document.getElementById('hasilBtn')
 
-var winners = new Array();
 var player1Selections = new Array();
 var player2Selections = new Array();
-var timer;
-var numberOfPlayers = 2;
 var currentPlayer = 0;
-var move = 0;
-var points1 = 0;    // player 1 points
-var points2 = 0;    // player 2 points
+var size = 3;
 
-document.getElementById("demo1").innerHTML = 3;
-document.getElementById("demo2").innerHTML = 3;
+/*
+function hasil(){
+    hasilWindow = new BrowserWindow({ width:1600 , height:800 });
+    hasilWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'hasil.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+}
+*/
 
+// Memunculkan window output
+function hasil(){
+    const modalPath = path.join('file://', __dirname, 'hasil.html')
+    let win = new BrowserWindow({ width:800, height:550 })
+    win.on('close', function(){ win = null })
+    win.loadURL(modalPath)
+    win.show()
+
+    win.on('close', function(){
+        win = null;
+    })
+    
+    const item = size;
+    ipcRenderer.send('ukuran', item);
+}
+
+// Membuat tabel sesuai ukuran & Mengubah value n x n
 function submit(){
     var i = document.getElementById("board").selectedIndex;
     var j = document.getElementById("board").options;
     document.getElementById("demo1").innerHTML = j[i].innerHTML;
     document.getElementById("demo2").innerHTML = j[i].innerHTML;
-    drawBoard(j[i].index + 3);
+    drawBoard(j[i].index + 3);    
+    drawHasil(j[i].index + 3);    
+    size = j[i].index + 3;
+    return size;
 }
 
+// Menghapus isi tabel
 function restart()
 {
     var i = document.getElementById("board").selectedIndex;
@@ -34,10 +60,13 @@ function restart()
     currentPlayer = 0;
     player1Selections = new Array();
     player2Selections = new Array();
+    /*
     d('player1').classList.add('selected');
     d('player2').classList.remove('selected');
+    */
 }
 
+// Menggambar tabel
 function drawBoard(n) {
     var Parent = document.getElementById("game");
     var counter = 1;
@@ -80,11 +109,58 @@ function drawBoard(n) {
 
         Parent.appendChild(row);
     }
+}
+// Menggambar board hasil
+function drawHasil(n) {
+    var Parent = document.getElementById("game2");
+    var counter = 1;
+    
+    while (Parent.hasChildNodes()) {
+        Parent.removeChild(Parent.firstChild);
+    }
 
-    loadAnswers();
+    for (s = 0; s < n; s++) {
+        var row = document.createElement("tr");
+        
+        for (r = 0; r < n; r++) {
+            var col = document.createElement("td");
+            col.id = counter;
+            //Buat nampilin nomer tiap kolom
+            //col.innerHTML = counter;
+
+            var handler = function(e) {
+                this.removeEventListener('click', arguments.callee);
+            };
+
+            col.addEventListener('click', handler);
+
+            row.appendChild(col);
+            counter++;
+        }
+
+        Parent.appendChild(row);
+    }
 }
 
-window.addEventListener('load', drawBoard(3));
+//Membuat Tree bisa di expand
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for(var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if(classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for(var i = 0; i < opensubs.length; i++){
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+    });
+}
 
-//resetBtn.addEventListener('click', drawBoard(size));
+// Memunculkan default tabel 3x3
+window.addEventListener('load', drawBoard(3));
+window.addEventListener('load', drawHasil(3));
     
