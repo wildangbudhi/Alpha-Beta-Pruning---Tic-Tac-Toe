@@ -38,13 +38,25 @@ class AlphaBetaPruning:
             self.checkerList.append((i, temp))
             self.checkerList.append((i, temp2))
             
+    def getNextMove(self, state):
+        
+        xPlayer , oPlayer , checker = 0, 0, 3
 
-    def expand(self, state, player):
+        for _ in range(0,  self.size * self.size):
+            if((state & checker) == 2): oPlayer = oPlayer + 1
+            if((state & checker) == 1): xPlayer = xPlayer + 1
+            checker = checker << 2
+
+        if(xPlayer == oPlayer): return 0
+        if(oPlayer < xPlayer): return 1
+
+    def expand(self, state):
         res = []
         checker = 3
 
         for i in range(0, self.size * self.size):
             if((state & checker) == 0):
+                player = self.getNextMove(state)
                 if(player == 0): # player x
                     res.append(state | (1 << (i * 2)))
                 elif(player == 1): # player o
