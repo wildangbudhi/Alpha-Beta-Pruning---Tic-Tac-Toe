@@ -6,10 +6,11 @@ const {ipcRenderer} = electron;
 const resetBtn = document.getElementById('resetBtn')
 const hasilBtn = document.getElementById('hasilBtn')
 
-var player1Selections = new Array();
+var size = 3;
+var player1Selections = new Array(size*size);
 var player2Selections = new Array();
 var currentPlayer = 0;
-var size = 3;
+var arrya = [];
 
 /*
 function hasil(){
@@ -23,6 +24,7 @@ function hasil(){
 */
 
 // Memunculkan window output
+/*
 function hasil(){
     const modalPath = path.join('file://', __dirname, 'hasil.html')
     let win = new BrowserWindow({ width:800, height:550 })
@@ -36,6 +38,23 @@ function hasil(){
     
     const item = size;
     ipcRenderer.send('ukuran', item);
+}
+*/
+
+function hasil(){
+    //console.log(player1Selections);
+    var tabel = document.getElementById('game');
+    
+    for(s=0; s<size; s++){
+        var col = tabel.rows.item(s).cells;
+        arrya.push([])
+        for(r=0; r<size; r++){
+            var cel = col.item(r).innerHTML;
+            arrya[s].push(cel);
+            
+        }
+    }
+    console.log(arrya);
 }
 
 // Membuat tabel sesuai ukuran & Mengubah value n x n
@@ -87,16 +106,18 @@ function drawBoard(n) {
             var handler = function(e) {
                 if (currentPlayer == 0) {
                     this.innerHTML = "X";
-                    player1Selections.push(parseInt(this.id));
-                    player1Selections.sort(function(a, b) { return a - b });
+                    //player1Selections.push(parseInt(this.id));
+                    //player1Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 1;
+                    player1Selections[counter] ='X';
                 }
 
                 else {
                     this.innerHTML = "O";
-                    player2Selections.push(parseInt(this.id));
-                    player2Selections.sort(function(a, b) { return a - b });
+                    //player2Selections.push(parseInt(this.id));
+                    //player2Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 0;
+                    player1Selections[counter] = 'O';
                 }
                 this.removeEventListener('click', arguments.callee);
             };
@@ -110,6 +131,7 @@ function drawBoard(n) {
         Parent.appendChild(row);
     }
 }
+
 // Menggambar board hasil
 function drawHasil(n) {
     var Parent = document.getElementById("game2");
