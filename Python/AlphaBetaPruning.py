@@ -93,7 +93,7 @@ class AlphaBetaPruning:
         if(utility): return 100 if utility == 1 else -100
         if(isFull): return 0
 
-        childs = self.expand(state,(depth) % 2)
+        childs = self.expand(state)
 
         if((depth % 2) == 0) : # max
             
