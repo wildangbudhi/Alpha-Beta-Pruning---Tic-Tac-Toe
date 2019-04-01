@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe - Alpha Beta Pruning</title>
+    <link rel= "stylesheet" href="../web/css/run.css">
+  </head>
+  <body>
+    <div>
+        <div class="container">
+            <p>
+              Pilih ukuran board 
+              <select onclick="submit()" id="board" name="board">
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                <br>
+                <br>
+                <button type="button" onclick="restart()" id="restart"> RESTART </button>
+                <!----button type="button" onclick="reset()" id="resetBtn">RESET</button>-->
+            </p>           
+        </div>
+        <div class="tabel" style="overflow-x:auto;">
+            <table id="game" class="tictactoe" contenteditable="true"></table>
+        </div>
+        <p>
+          Ukuran Tabel yang dipilih adalah : <span id="demo1"></span> x <span id="demo2"></span>
+        </p>
+      </div>
+    
+    <script src="run.js"></script>
+  </body> 
+</html>
