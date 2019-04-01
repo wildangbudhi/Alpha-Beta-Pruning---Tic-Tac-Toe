@@ -83,50 +83,60 @@ class AlphaBetaPruning:
         return True
 
     def solve(self, state, depth, alpha, beta):
-        self.AdjList[state] = []
 
         value = alpha if (depth % 2) == 0 else beta
         utility = self.isThereWinner(state)
         isFull = self.isFull(state)
 
         if(utility): return 100 if utility == 1 else -100
-        if(isFull): return 0
+        elif(isFull): return 0
+        else: 
+            self.AdjList[state] = []
 
         childs = self.expand(state)
 
         if((depth % 2) == 0) : # max
             
             best = -maxsize
+            pruned = False
 
-            for child in childs:
-                self.AdjList[state].append(child)
+            while childs:
 
-                value = self.solve(child, depth + 1, alpha, beta)
+                child = childs.pop(0)
+                self.AdjList[state].append((child, pruned))
 
-                best = max(best, value)
-                alpha = max(alpha, best)
+                if(not pruned):
+                    value = self.solve(child, depth + 1, alpha, beta)
 
-                # Pruning
-                if(beta <= alpha):
-                    # print('Pruning')
+                    best = max(best, value)
+                    alpha = max(alpha, best)
+
+                    # Pruning
+                    if(beta <= alpha):
+                        pruned = True
+                else:
                     break
 
             return best
         
         else: # min
             best = maxsize
+            pruned = False
 
-            for child in childs:
-                self.AdjList[state].append(child)
+            while childs:
+                child = childs.pop(0)
+                self.AdjList[state].append((child, pruned))
 
-                value = self.solve(child, depth + 1, alpha, beta)
+                if(not pruned):
+                    value = self.solve(child, depth + 1, alpha, beta)
 
-                best = min(best, value)
-                beta = min(beta, best)
+                    best = min(best, value)
+                    beta = min(beta, best)
 
-                # Pruning
-                if(beta <= alpha):
-                    # print('Pruning')
+                    # Pruning
+                    if(beta <= alpha):
+                        pruned = True
+                else:
                     break
 
             return best
