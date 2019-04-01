@@ -12,9 +12,17 @@ p{
     margin-top: 20px;
 }
 
+#game{
+    margin-left: 15px;
+}
+
+#game2{
+    margin-right: 5px;
+}
+
 .container{
     float: left;
-    width: 32vw;
+    width: 33vw;
 
 }
 
@@ -25,7 +33,6 @@ select{
 
 table
 {
-    margin-left: 5px;
     width: 31vw;
     height: 400px;
     font-size:5.5vh;

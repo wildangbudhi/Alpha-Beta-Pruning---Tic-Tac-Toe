@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Tic Tac Toe - Alpha Beta Pruning</title>
     <link rel= "stylesheet" href="../web/css/run.css">
+    <link rel="stylesheet" href="../web/css/treeCreater.css">
   </head>
   <body>
     <div class="container">
@@ -23,7 +24,7 @@
             <br>
             <br>
             <button type="button" onclick="restart()" id="restart"> RESTART </button>
-            <button type="button" onclick="hasil()" id="hasil"> PLAY </button>
+            <button type="button" onclick="toggle_visibility('output1'),hasil(),toggle_visibility('output2')" id="hasilBtn"> PLAY </button>
             <!----button type="button" onclick="reset()" id="resetBtn">RESET</button>-->
         </p>           
         <div style="overflow-x:auto;">
@@ -31,11 +32,13 @@
         </div>
     </div>
 
-    <div class="container">   
+    <div id="output1" class="container" style="display: none">   
       <h4>Menampilkan Tree:</h4>
       <p>
         Ukuran Tabel yang dipilih adalah : <span id="demo1">3</span> x <span id="demo2">3</span>
       </p>  
+      <ul class="treeRoot"></ul>
+      <!--
       <ul class="tree">
         <li><a href="#">Part 1</a>
           <ul>
@@ -157,9 +160,10 @@
           </ul>
         </li>
       </ul>
-    </div>
+      -->
+    </div> 
 
-    <div class="container">   
+    <div id="output2" class="container"style="display: none">   
         <h4>Menampilkan State:</h4>  
         <div class="tabel" style="overflow-x:auto;">
           <table id="game2" class="tictactoe" contenteditable="true"></table>
@@ -167,5 +171,6 @@
       </div>
     
     <script src="run.js"></script>
+    <script src="treeCreater.js-master/treeCreater.js"></script>
   </body> 
 </html>
