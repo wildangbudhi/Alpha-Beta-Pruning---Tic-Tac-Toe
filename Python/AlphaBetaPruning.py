@@ -40,12 +40,13 @@ class AlphaBetaPruning:
             
     def getNextMove(self, state):
         
+        temp = state
         xPlayer , oPlayer , checker = 0, 0, 3
 
         for _ in range(0,  self.size * self.size):
-            if((state & checker) == 2): oPlayer = oPlayer + 1
-            if((state & checker) == 1): xPlayer = xPlayer + 1
-            checker = checker << 2
+            if((temp & checker) == 2): oPlayer = oPlayer + 1
+            if((temp & checker) == 1): xPlayer = xPlayer + 1
+            temp = temp >> 2
 
         if(xPlayer == oPlayer): return 0
         if(oPlayer < xPlayer): return 1
@@ -81,10 +82,8 @@ class AlphaBetaPruning:
             checker = checker << 2
         return True
 
-    def solve(self, state, depth, alpha, beta, maximum):
+    def solve(self, state, depth, alpha, beta):
         self.AdjList[state] = []
-
-        # print(UnHash(state, self.size))
 
         value = alpha if (depth % 2) == 0 else beta
         utility = self.isThereWinner(state)
@@ -102,7 +101,7 @@ class AlphaBetaPruning:
             for child in childs:
                 self.AdjList[state].append(child)
 
-                value = self.solve(child, depth + 1, alpha, beta, maximum)
+                value = self.solve(child, depth + 1, alpha, beta)
 
                 best = max(best, value)
                 alpha = max(alpha, best)
@@ -120,7 +119,7 @@ class AlphaBetaPruning:
             for child in childs:
                 self.AdjList[state].append(child)
 
-                value = self.solve(child, depth + 1, alpha, beta, maximum)
+                value = self.solve(child, depth + 1, alpha, beta)
 
                 best = min(best, value)
                 beta = min(beta, best)
@@ -131,7 +130,3 @@ class AlphaBetaPruning:
                     break
 
             return best
-
-            
-            
-

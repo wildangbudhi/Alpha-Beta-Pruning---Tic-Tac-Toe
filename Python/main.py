@@ -6,12 +6,12 @@ def main():
     #                 [' ', 'o', 'x', ' '],
     #                 [' ', 'o', 'x', ' ']   ]
 
-    InitStateA = [  ['x', 'x', 'o'],
-                    [' ', 'o', ' '],
-                    ['x', 'o', ' ']   ]
+    InitStateA = [  ['o', 'o', 'x'],
+                    [' ', 'x', ' '],
+                    ['o', 'x', ' ']   ]
 
     ABP = AlphaBetaPruning(InitStateA)
-    ABP.solve(ABP.InitialState, 0, -maxsize, maxsize, 'x')
+    ABP.solve(ABP.InitialState, 0, -maxsize, maxsize)
 
     for i, j in ABP.AdjList.items():
         print(UnHash(i, ABP.size))
