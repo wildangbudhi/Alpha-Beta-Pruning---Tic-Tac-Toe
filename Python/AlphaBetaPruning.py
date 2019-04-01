@@ -88,11 +88,12 @@ class AlphaBetaPruning:
         utility = self.isThereWinner(state)
         isFull = self.isFull(state)
 
+        self.AdjList[state] = []
+
         if(utility): return 100 if utility == 1 else -100
         elif(isFull): return 0
-        else: 
-            self.AdjList[state] = []
-
+        # else: 
+        
         childs = self.expand(state)
 
         if((depth % 2) == 0) : # max
@@ -115,6 +116,7 @@ class AlphaBetaPruning:
                     if(beta <= alpha):
                         pruned = True
                 else:
+                    self.AdjList[child] = []
                     break
 
             return best
@@ -137,6 +139,7 @@ class AlphaBetaPruning:
                     if(beta <= alpha):
                         pruned = True
                 else:
+                    self.AdjList[child] = []
                     break
 
             return best
