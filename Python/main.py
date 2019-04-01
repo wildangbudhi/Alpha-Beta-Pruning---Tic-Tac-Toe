@@ -6,9 +6,9 @@ def main():
     #                 [' ', 'o', 'x', ' '],
     #                 [' ', 'o', 'x', ' ']   ]
 
-    InitStateA = [  ['o', 'o', 'x'],
-                    [' ', 'x', ' '],
-                    ['o', 'x', ' ']   ]
+    InitStateA = [  ['x', 'x', 'o'],
+                    [' ', 'o', ' '],
+                    ['x', 'o', ' ']   ]
 
     ABP = AlphaBetaPruning(InitStateA)
     ABP.solve(ABP.InitialState, 0, -maxsize, maxsize, 'x')
