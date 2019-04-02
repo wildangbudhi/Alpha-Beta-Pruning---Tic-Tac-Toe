@@ -7,7 +7,7 @@ isVisited = dict()
 def DFS(AdjList, node):
 
     data = dict()
-    data['title'] = node
+    data['name'] = node
     
     lis = list()
     for i in AdjList[node]:
