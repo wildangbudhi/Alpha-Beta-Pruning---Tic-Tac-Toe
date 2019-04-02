@@ -19,8 +19,8 @@ def UnHash(num, size):
         for j in range(0, size):
             temp = 3
             cal = num & temp
-            if(cal == 1): res[i].append('x')
-            elif(cal == 2): res[i].append('o')
+            if(cal == 1): res[i].append('X')
+            elif(cal == 2): res[i].append('O')
             else: res[i].append(' ')
             num = num >> 2
     

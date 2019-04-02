@@ -43,7 +43,7 @@ def main():
 
     data = list()
     data.append(DFS(ABP.AdjList, next(iter(ABP.AdjList.keys()))))
-    print(json.dumps({'tree' : ABP.AdjList, 'HashTable' : HashTable}))
+    print(json.dumps({'adj.list' : ABP.AdjList, 'tree' : data, 'HashTable' : HashTable}))
     sys.stdout.flush()
 
 

@@ -104,19 +104,22 @@ class AlphaBetaPruning:
             while childs:
 
                 child = childs.pop(0)
-                self.AdjList[state].append((child, pruned))
+                # self.AdjList[state].append((child, pruned, alpha, beta))
 
                 if(not pruned):
                     value = self.solve(child, depth + 1, alpha, beta)
 
                     best = max(best, value)
                     alpha = max(alpha, best)
+                    
+                    self.AdjList[state].append((child, pruned, alpha, beta))
 
                     # Pruning
                     if(beta <= alpha):
                         pruned = True
                 else:
                     self.AdjList[child] = []
+                    self.AdjList[state].append((child, pruned, alpha, beta))
                     break
 
             return best
@@ -127,7 +130,7 @@ class AlphaBetaPruning:
 
             while childs:
                 child = childs.pop(0)
-                self.AdjList[state].append((child, pruned))
+                # self.AdjList[state].append((child, pruned, alpha, beta))
 
                 if(not pruned):
                     value = self.solve(child, depth + 1, alpha, beta)
@@ -135,11 +138,14 @@ class AlphaBetaPruning:
                     best = min(best, value)
                     beta = min(beta, best)
 
+                    self.AdjList[state].append((child, pruned, alpha, beta))
+
                     # Pruning
                     if(beta <= alpha):
                         pruned = True
                 else:
                     self.AdjList[child] = []
+                    self.AdjList[state].append((child, pruned, alpha, beta))
                     break
 
             return best
