@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Tic Tac Toe - Alpha Beta Pruning</title>
     <link rel= "stylesheet" href="../web/css/run.css">
-    <link rel="stylesheet" href="../web/css/treeCreater.css">
+    <link rel= "stylesheet" href="../js-treeview-master/dist/treeview.min.css">
   </head>
   <body>
     <div class="container">
@@ -37,130 +37,7 @@
       <p>
         Ukuran Tabel yang dipilih adalah : <span id="demo1">3</span> x <span id="demo2">3</span>
       </p>  
-      <ul class="treeRoot"></ul>
-      <!--
-      <ul class="tree">
-        <li><a href="#">Part 1</a>
-          <ul>
-            <li><a href="#">Item A</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item B</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item C</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item D</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item E</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      
-        <li><a href="#">Part 2</a>
-          <ul>
-            <li><a href="#">Item A</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item B</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item C</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item D</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item E</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      
-        <li><a href="#">Part 3</a>
-          <ul>
-            <li><a href="#">Item A</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item B</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item C</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item D</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Item E</a>
-              <ul>
-                <li><a href="#">Sub-item 1</a></li>
-                <li><a href="#">Sub-item 2</a></li>
-                <li><a href="#">Sub-item 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      -->
+      <div id="tree"></div>
     </div> 
 
     <div id="output2" class="container"style="display: none">   
@@ -171,6 +48,6 @@
       </div>
     
     <script src="run.js"></script>
-    <script src="treeCreater.js-master/treeCreater.js"></script>
+    <script src="../js-treeview-master/dist/treeview.min.js"></script>
   </body> 
 </html>

@@ -9,7 +9,7 @@ let winHasil;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 1400, height: 700, resizable: false })
-  //winIntro = new BrowserWindow({ frame:false, width:400, height:320 });
+  winIntro = new BrowserWindow({ frame:false, width:400, height:320 });
   
   winHasil = new BrowserWindow()
   winHasil.loadFile('web/hasil.html');
@@ -17,7 +17,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadFile('web/run.html')
-  //winIntro.loadFile('web/index.html')
+  winIntro.loadFile('web/index.html')
 
   // Open the DevTools.
   //win.webContents.openDevTools()

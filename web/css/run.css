@@ -26,6 +26,10 @@ p{
 
 }
 
+#output1{
+    width: 30vw;
+}
+
 select{
     font-size: 17px;
     top: 5px;
@@ -66,30 +70,30 @@ td:hover
 button{
     width: 100px;
 }
-
-.tree{
+/* 
+.treeRoot{
     text-align: left;
 }
 
-ul.tree li {
+ul.treeRoot li {
     list-style-type: none;
     position: relative;
 }
 
-ul.tree li ul {
+div.treeRoot li ul {
     display: none;
 }
 
-ul.tree li.open > ul {
+ul.treeRoot li.open > ul {
     display: block;
 }
 
-ul.tree li a {
+ul.treeRoot li a {
     color: orange;
     text-decoration: none;
 }
 
-ul.tree li a:before {
+ul.treeRoot li a:before {
     height: 1em;
     padding:0 .1em;
     font-size: .8em;
@@ -99,10 +103,51 @@ ul.tree li a:before {
     top: .2em;
 }
 
-ul.tree li > a:not(:last-child):before {
+ul.treeRoot li > a:not(:last-child):before {
     content: '+';
 }
 
-ul.tree li.open > a:not(:last-child):before {
+ul.treeRoot li.open > a:not(:last-child):before {
     content: '-';
 }
+
+.treeRoot li {
+    list-style: none;
+    margin: 5px 0 5px 20px;
+}
+.treeRoot li[level='0'] {
+    margin-left: 0;
+}
+.treeRoot li:not(.parentNode) {
+    padding-left: 15px;
+}
+.triangle {
+    width:0;
+    height:0;
+    overflow:hidden;
+    font-size: 0;     
+    line-height: 0;  
+    border-width:5px;
+    transition: transform .2s;
+    transform-origin: left center;
+    border-style:solid dashed dashed dashed;
+    border-color:transparent transparent transparent #000;
+}
+.closed .triangle {
+    transform: rotateZ(90deg);
+}
+.treeRoot div.title {
+    height: 21px;
+    position: relative;
+}
+.treeRoot div.title i {
+    position: absolute;
+    top: 6px;
+    left: 0;
+}
+.treeRoot div.title p {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    margin: 0;
+} */

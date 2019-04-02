@@ -1,0 +1,14 @@
+ETS KBA
+
+TicTacToe - Alpha Beta Pruning
+
+Kelompok 1:
+Bryan Khufa R. A.	05111740000071
+Rangga Kusuma D.	05111740000120
+Wildan Ghiffarie B.	05111740000184
+
+
+Link Google Drive :
+https://drive.google.com/file/d/1peypr_Jw9WAMEFhplFVTPT7YG87offDI/view?usp=sharing
+
+fix

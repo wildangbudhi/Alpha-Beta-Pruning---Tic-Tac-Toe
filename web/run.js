@@ -14,43 +14,99 @@ var currentPlayer = 0;
 var arrya = [];
 var coba = [['O','O','X'], [' ','X','X'],['O','X','X']];
 
+var tree=
+[{
+    'name': 24858, 
+    'children': [
+        {
+            'name': 24922, 
+            'children': [
+                {
+                    'name': 26970, 
+                    'children': [
+                        {
+                            'name': 92506
+                        }
+                    ]
+                }, 
+                {
+                    'name': 155994, 
+                    'children': [
+                        {
+                            'name': 157018
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            'name': 25882, 
+            'children': [
+                {
+                    'name': 26010
+                }, 
+                {
+                    'name': 156954
+                }
+            ]
+        }, 
+        {
+            'name': 90394, 
+            'children': [
+                {
+                    'name': 90522
+                }, 
+                {
+                    'name': 92442
+                }
+            ]
+        }
+    ]
+}];
+
+
+// var tree = [{
+//     name: 'Vegetables',
+//     children: []
+//     }, {
+//     name: 'Fruits',
+//     children: [{
+//       name: 'Apple',
+//       children: []
+//     }, {
+//       name: 'Orange',
+//       children: []
+//     }, {
+//       name: 'Lemon',
+//       children: []
+//     }]
+//     }, {
+//     name: 'Candy',
+//     children: [{
+//       name: 'Gummies',
+//       children: []
+//     }, {
+//       name: 'Chocolate',
+//       children: [{
+//       name: 'M & M\'s',
+//       children: []
+//       }, {
+//       name: 'Hershey Bar',
+//       children: []
+//       }]
+//     }, ]
+//     }, {
+//     name: 'Bread',
+//     children: []
+//   }];
+
 // Memunculkan default tabel 3x3
 window.addEventListener('load', drawBoard(size));
 window.addEventListener('load', drawState(size));
 
 hasilBtn.addEventListener('click', drawState(size));
 
-/*
 function hasil(){
-    hasilWindow = new BrowserWindow({ width:1600 , height:800 });
-    hasilWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'hasil.html'),
-        protocol: 'file',
-        slashes: true
-    }));
-}
-*/
-
-// Memunculkan window output
-/*
-function hasil(){
-    const modalPath = path.join('file://', __dirname, 'hasil.html')
-    let win = new BrowserWindow({ width:800, height:550 })
-    win.on('close', function(){ win = null })
-    win.loadURL(modalPath)
-    win.show()
-
-    win.on('close', function(){
-        win = null;
-    })
-    
-    const item = size;
-    ipcRenderer.send('ukuran', item);
-}
-*/
-
-function hasil(){
-    //console.log(player1Selections);
     var tabel = document.getElementById('game');
     
     for(s=0; s<size; s++){
@@ -62,11 +118,12 @@ function hasil(){
         }
     }
     var cobs = coba[0][2];
-    console.log(cobs);
+    // console.log(cobs);
     drawState(size);
+    var t = new TreeView(tree, 'tree');
 
     hasilBtn.disabled = true;
-    // console.log(arrya);
+     console.log(arrya);
 }
 
 // Membuat tabel sesuai ukuran & Mengubah value n x n
@@ -78,6 +135,8 @@ function submit(){
     drawBoard(j[i].index + 3);    
     //drawHasil(j[i].index + 3);    
     size = j[i].index + 3;
+    arrya = [];
+    hasilBtn.disabled = false;
     return size;
 }
 
@@ -91,10 +150,6 @@ function restart()
     currentPlayer = 0;
     arrya = [];
     hasilBtn.disabled = false;
-    /*
-    d('player1').classList.add('selected');
-    d('player2').classList.remove('selected');
-    */
 }
 
 // Menggambar tabel
@@ -118,16 +173,12 @@ function drawBoard(n) {
             var handler = function(e) {
                 if (currentPlayer == 0) {
                     this.innerHTML = "X";
-                    //player1Selections.push(parseInt(this.id));
-                    //player1Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 1;
                     player1Selections[counter] ='X';
                 }
 
                 else {
                     this.innerHTML = "O";
-                    //player2Selections.push(parseInt(this.id));
-                    //player2Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 0;
                     player1Selections[counter] = 'O';
                 }
@@ -143,8 +194,6 @@ function drawBoard(n) {
         Parent.appendChild(row);
     }
 }
-
-
 
 // Menggambar state
 function drawState(n) {
@@ -165,27 +214,6 @@ function drawState(n) {
             //Buat nampilin nomer tiap kolom
             //col.innerHTML = counter;
 
-            // var handler = function(e) {
-            //     if (currentPlayer == 0) {
-            //         this.innerHTML = "X";
-            //         //player1Selections.push(parseInt(this.id));
-            //         //player1Selections.sort(function(a, b) { return a - b });
-            //         currentPlayer = 1;
-            //         player1Selections[counter] ='X';
-            //     }
-
-            //     else {
-            //         this.innerHTML = "O";
-            //         //player2Selections.push(parseInt(this.id));
-            //         //player2Selections.sort(function(a, b) { return a - b });
-            //         currentPlayer = 0;
-            //         player1Selections[counter] = 'O';
-            //     }
-            //     this.removeEventListener('click', arguments.callee);
-            // };
-
-            // col.addEventListener('click', handler);
-
             row.appendChild(col);
             counter++;
         }
@@ -193,57 +221,6 @@ function drawState(n) {
         Parent.appendChild(row);
     }
 }
-
-// Menggambar board hasil
-// function drawHasil(n) {
-//     var Parent = document.getElementById("game2");
-//     var counter = 1;
-    
-//     while (Parent.hasChildNodes()) {
-//         Parent.removeChild(Parent.firstChild);
-//     }
-
-//     for (s = 0; s < n; s++) {
-//         var row = document.createElement("tr");
-
-//         for (r = 0; r < n; r++) {
-//             var col = document.createElement("td");
-//             col.id = counter;
-//             //Buat nampilin nomer tiap kolom
-//             //col.innerHTML = counter;
-
-//             var handler = function(e) {
-//                 this.removeEventListener('click', arguments.callee);
-//             };
-
-//             col.addEventListener('click', handler);
-
-//             row.appendChild(col);
-//             counter++;
-//         }
-
-//         Parent.appendChild(row);
-//     }
-// }
-
-//Membuat Tree bisa di expand
-var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
-for(var i = 0; i < tree.length; i++){
-    tree[i].addEventListener('click', function(e) {
-        var parent = e.target.parentElement;
-        var classList = parent.classList;
-        if(classList.contains("open")) {
-            classList.remove('open');
-            var opensubs = parent.querySelectorAll(':scope .open');
-            for(var i = 0; i < opensubs.length; i++){
-                opensubs[i].classList.remove('open');
-            }
-        } else {
-            classList.add('open');
-        }
-    });
-}
-
    
 // Hide Output
 function toggle_visibility(id) {
@@ -252,41 +229,3 @@ function toggle_visibility(id) {
     //     e.style.display = 'none';
         e.style.display = 'block';
 }
-
-//sodifjweoifdofjdsfof
-function treeCreater(treeArr, className) {
-    var $ = treeArr,
-        root = document.createDocumentFragment(),
-        childLevel = 0
-    function insertChildren(parentNode, traverseArr) {
-        for(let i = 0; i < traverseArr.length; i++) {
-            if(parentNode === root) {
-                childLevel = 0
-            }
-            var currentLi = document.createElement('li')
-            currentLi.setAttribute('level', childLevel)
-            if(traverseArr[i].children && traverseArr[i].children.length > 0) {
-                var title = document.createElement('div')
-                var triangle = document.createElement('i')
-                var text = document.createElement('p')
-                currentLi.classList.add('parentNode')
-                title.classList.add('title')
-                triangle.classList.add('triangle')
-                text.innerText = traverseArr[i].title
-                title.appendChild(triangle)
-                title.appendChild(text)
-                currentLi.appendChild(title)
-                childLevel++
-                insertChildren(currentLi, traverseArr[i].children)
-            }else {
-                currentLi.innerText = traverseArr[i].title
-            }
-            parentNode.appendChild(currentLi)
-        }
-    }
-    insertChildren(root, $)
-    document.querySelector('ul.' + className + '').appendChild(root)
-}
-
-// treeCreater(quotaTree, 'treeRoot')
-window.addEventListener('load', treeCreater(5, pdidpfdsi));

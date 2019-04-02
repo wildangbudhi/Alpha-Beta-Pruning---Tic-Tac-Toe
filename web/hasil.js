@@ -9,8 +9,6 @@ var currentPlayer = 0;
 var size = 10;
 
 
-//window.addEventListener('load', kirim());
-
 // Menggambar Tabel
 
 function drawBoard(x) {
