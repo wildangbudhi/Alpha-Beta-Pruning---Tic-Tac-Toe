@@ -5,8 +5,8 @@ def Hash(state):
     for i in range(0, len(state)):
         for j in range(0, len(state[i])):
             temp = 1
-            if(state[i][j] == 'x'): res = res | ( temp << (2 * count) )
-            elif(state[i][j] == 'o'): res = res | ( temp << ((2 * count) + 1) )
+            if(state[i][j] == 'X'): res = res | ( temp << (2 * count) )
+            elif(state[i][j] == 'O'): res = res | ( temp << ((2 * count) + 1) )
             count = count + 1
 
     return res

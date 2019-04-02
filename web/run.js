@@ -1,5 +1,6 @@
 const electron = require('electron');
 const path = require('path');
+const {PythonShell} = require('python-shell')
 const BrowserWindow = electron.remote.BrowserWindow;
 const {ipcRenderer} = electron;
 
@@ -12,7 +13,7 @@ var player1Selections = new Array(size*size);
 var player2Selections = new Array();
 var currentPlayer = 0;
 var arrya = [];
-var coba = [['O','O','X'], [' ','X','X'],['O','X','X']];
+var data = {};
 
 var tree=
 [{
@@ -102,11 +103,9 @@ var tree=
 
 // Memunculkan default tabel 3x3
 window.addEventListener('load', drawBoard(size));
-window.addEventListener('load', drawState(size));
-
-hasilBtn.addEventListener('click', drawState(size));
 
 function hasil(){
+    //console.log(player1Selections);
     var tabel = document.getElementById('game');
     
     for(s=0; s<size; s++){
@@ -117,13 +116,31 @@ function hasil(){
             arrya[s].push(cel);
         }
     }
-    var cobs = coba[0][2];
-    // console.log(cobs);
+    python()
     drawState(size);
-    var t = new TreeView(tree, 'tree');
-
+    
     hasilBtn.disabled = true;
      console.log(arrya);
+}
+
+function python() {
+    let dataIn = JSON.stringify(arrya);
+    
+    let options = {
+        pythonPath: 'C:/ProgramData/Anaconda3/python.exe',
+        scriptPath: 'C:/Users/comp/Documents/Python/KB/Alpha-Beta-Pruning---Tic-Tac-Toe/Python/', 
+        args : [dataIn]
+    };
+
+    PythonShell.run('main.py', options, function(err, results) {
+        if(err) throw err;
+        data = JSON.parse(results);
+    });
+    
+}
+
+function generate() {
+    console.log(data);
 }
 
 // Membuat tabel sesuai ukuran & Mengubah value n x n
@@ -167,8 +184,6 @@ function drawBoard(n) {
         for (r = 0; r < n; r++) {
             var col = document.createElement("td");
             col.id = counter;
-            //Buat nampilin nomer tiap kolom
-            //col.innerHTML = counter;
 
             var handler = function(e) {
                 if (currentPlayer == 0) {
@@ -211,8 +226,6 @@ function drawState(n) {
             var col = document.createElement("td");
 
             col.innerHTML = arrya[s][r];
-            //Buat nampilin nomer tiap kolom
-            //col.innerHTML = counter;
 
             row.appendChild(col);
             counter++;
