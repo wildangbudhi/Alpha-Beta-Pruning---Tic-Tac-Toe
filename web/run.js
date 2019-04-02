@@ -1,5 +1,6 @@
 const electron = require('electron');
 const path = require('path');
+const {PythonShell} = require('python-shell')
 const BrowserWindow = electron.remote.BrowserWindow;
 const {ipcRenderer} = electron;
 
@@ -12,42 +13,10 @@ var player1Selections = new Array(size*size);
 var player2Selections = new Array();
 var currentPlayer = 0;
 var arrya = [];
-var coba = [['O','O','X'], [' ','X','X'],['O','X','X']];
+var data = {};
 
 // Memunculkan default tabel 3x3
 window.addEventListener('load', drawBoard(size));
-window.addEventListener('load', drawState(size));
-
-hasilBtn.addEventListener('click', drawState(size));
-
-/*
-function hasil(){
-    hasilWindow = new BrowserWindow({ width:1600 , height:800 });
-    hasilWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'hasil.html'),
-        protocol: 'file',
-        slashes: true
-    }));
-}
-*/
-
-// Memunculkan window output
-/*
-function hasil(){
-    const modalPath = path.join('file://', __dirname, 'hasil.html')
-    let win = new BrowserWindow({ width:800, height:550 })
-    win.on('close', function(){ win = null })
-    win.loadURL(modalPath)
-    win.show()
-
-    win.on('close', function(){
-        win = null;
-    })
-    
-    const item = size;
-    ipcRenderer.send('ukuran', item);
-}
-*/
 
 function hasil(){
     //console.log(player1Selections);
@@ -61,12 +30,31 @@ function hasil(){
             arrya[s].push(cel);
         }
     }
-    var cobs = coba[0][2];
-    console.log(cobs);
+    python()
     drawState(size);
-
+    
     hasilBtn.disabled = true;
     // console.log(arrya);
+}
+
+function python() {
+    let dataIn = JSON.stringify(arrya);
+    
+    let options = {
+        pythonPath: 'C:/ProgramData/Anaconda3/python.exe',
+        scriptPath: 'C:/Users/comp/Documents/Python/KB/Alpha-Beta-Pruning---Tic-Tac-Toe/Python/', 
+        args : [dataIn]
+    };
+
+    PythonShell.run('main.py', options, function(err, results) {
+        if(err) throw err;
+        data = JSON.parse(results);
+    });
+    
+}
+
+function generate() {
+    console.log(data);
 }
 
 // Membuat tabel sesuai ukuran & Mengubah value n x n
@@ -112,22 +100,16 @@ function drawBoard(n) {
         for (r = 0; r < n; r++) {
             var col = document.createElement("td");
             col.id = counter;
-            //Buat nampilin nomer tiap kolom
-            //col.innerHTML = counter;
 
             var handler = function(e) {
                 if (currentPlayer == 0) {
                     this.innerHTML = "X";
-                    //player1Selections.push(parseInt(this.id));
-                    //player1Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 1;
                     player1Selections[counter] ='X';
                 }
 
                 else {
                     this.innerHTML = "O";
-                    //player2Selections.push(parseInt(this.id));
-                    //player2Selections.sort(function(a, b) { return a - b });
                     currentPlayer = 0;
                     player1Selections[counter] = 'O';
                 }
@@ -143,8 +125,6 @@ function drawBoard(n) {
         Parent.appendChild(row);
     }
 }
-
-
 
 // Menggambar state
 function drawState(n) {
@@ -162,29 +142,6 @@ function drawState(n) {
             var col = document.createElement("td");
 
             col.innerHTML = arrya[s][r];
-            //Buat nampilin nomer tiap kolom
-            //col.innerHTML = counter;
-
-            // var handler = function(e) {
-            //     if (currentPlayer == 0) {
-            //         this.innerHTML = "X";
-            //         //player1Selections.push(parseInt(this.id));
-            //         //player1Selections.sort(function(a, b) { return a - b });
-            //         currentPlayer = 1;
-            //         player1Selections[counter] ='X';
-            //     }
-
-            //     else {
-            //         this.innerHTML = "O";
-            //         //player2Selections.push(parseInt(this.id));
-            //         //player2Selections.sort(function(a, b) { return a - b });
-            //         currentPlayer = 0;
-            //         player1Selections[counter] = 'O';
-            //     }
-            //     this.removeEventListener('click', arguments.callee);
-            // };
-
-            // col.addEventListener('click', handler);
 
             row.appendChild(col);
             counter++;
@@ -192,56 +149,6 @@ function drawState(n) {
 
         Parent.appendChild(row);
     }
-}
-
-// Menggambar board hasil
-// function drawHasil(n) {
-//     var Parent = document.getElementById("game2");
-//     var counter = 1;
-    
-//     while (Parent.hasChildNodes()) {
-//         Parent.removeChild(Parent.firstChild);
-//     }
-
-//     for (s = 0; s < n; s++) {
-//         var row = document.createElement("tr");
-
-//         for (r = 0; r < n; r++) {
-//             var col = document.createElement("td");
-//             col.id = counter;
-//             //Buat nampilin nomer tiap kolom
-//             //col.innerHTML = counter;
-
-//             var handler = function(e) {
-//                 this.removeEventListener('click', arguments.callee);
-//             };
-
-//             col.addEventListener('click', handler);
-
-//             row.appendChild(col);
-//             counter++;
-//         }
-
-//         Parent.appendChild(row);
-//     }
-// }
-
-//Membuat Tree bisa di expand
-var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
-for(var i = 0; i < tree.length; i++){
-    tree[i].addEventListener('click', function(e) {
-        var parent = e.target.parentElement;
-        var classList = parent.classList;
-        if(classList.contains("open")) {
-            classList.remove('open');
-            var opensubs = parent.querySelectorAll(':scope .open');
-            for(var i = 0; i < opensubs.length; i++){
-                opensubs[i].classList.remove('open');
-            }
-        } else {
-            classList.add('open');
-        }
-    });
 }
 
    
@@ -252,41 +159,3 @@ function toggle_visibility(id) {
     //     e.style.display = 'none';
         e.style.display = 'block';
 }
-
-//sodifjweoifdofjdsfof
-function treeCreater(treeArr, className) {
-    var $ = treeArr,
-        root = document.createDocumentFragment(),
-        childLevel = 0
-    function insertChildren(parentNode, traverseArr) {
-        for(let i = 0; i < traverseArr.length; i++) {
-            if(parentNode === root) {
-                childLevel = 0
-            }
-            var currentLi = document.createElement('li')
-            currentLi.setAttribute('level', childLevel)
-            if(traverseArr[i].children && traverseArr[i].children.length > 0) {
-                var title = document.createElement('div')
-                var triangle = document.createElement('i')
-                var text = document.createElement('p')
-                currentLi.classList.add('parentNode')
-                title.classList.add('title')
-                triangle.classList.add('triangle')
-                text.innerText = traverseArr[i].title
-                title.appendChild(triangle)
-                title.appendChild(text)
-                currentLi.appendChild(title)
-                childLevel++
-                insertChildren(currentLi, traverseArr[i].children)
-            }else {
-                currentLi.innerText = traverseArr[i].title
-            }
-            parentNode.appendChild(currentLi)
-        }
-    }
-    insertChildren(root, $)
-    document.querySelector('ul.' + className + '').appendChild(root)
-}
-
-// treeCreater(quotaTree, 'treeRoot')
-window.addEventListener('load', treeCreater(5, pdidpfdsi));

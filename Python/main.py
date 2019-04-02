@@ -1,4 +1,5 @@
 from AlphaBetaPruning import AlphaBetaPruning, State , UnHash, maxsize
+import sys
 import json
 
 isVisited = dict()
@@ -23,9 +24,11 @@ def main():
     #                 [' ', 'o', 'x', ' '],
     #                 [' ', 'o', 'x', ' ']   ]
 
-    InitStateA = [  ['o', 'o', 'x'],
-                    [' ', 'x', ' '],
-                    ['o', 'x', ' ']   ]
+    # InitStateA = [  ['O', 'O', 'X'],
+    #                 [' ', 'X', ' '],
+    #                 ['O', 'X', ' ']   ]
+
+    InitStateA = json.loads(sys.argv[1])
 
     ABP = AlphaBetaPruning(InitStateA)
     ABP.solve(ABP.InitialState, 0, -maxsize, maxsize)
@@ -37,14 +40,11 @@ def main():
         for child in j:
             if(child[0] not in HashTable):
                 HashTable[child[0]] = UnHash(child[0], ABP.size)
-    
-    # print(ABP.AdjList)
+
     data = list()
     data.append(DFS(ABP.AdjList, next(iter(ABP.AdjList.keys()))))
-    # print(json.dumps(data))
-
-    
     print(json.dumps({'tree' : data, 'HashTable' : HashTable}))
+    sys.stdout.flush()
 
 
 if __name__ == "__main__":
